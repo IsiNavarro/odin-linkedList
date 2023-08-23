@@ -34,12 +34,14 @@ class LinkedList {
   }
 
   append(value) {
-    this.tail.next = value;
+    this.tail.next = new Node(value);
   }
 
   prepend(value) {
-    value.next = this.head;
-    this.head = value;
+    const node = new Node(value);
+
+    node.next = this.head;
+    this.head = node;
   }
 
   pop() {
@@ -73,6 +75,19 @@ class LinkedList {
       node = node.next;
     }
     return `${string} -> null`;
+  }
+
+  insertAt(value, index) {
+    let oldNode = this.at(index);
+    this.at(index - 1).next = new Node(value);
+    this.at(index).next = oldNode;
+  }
+
+  removeAt(index) {
+    let oldNode = this.at(index);
+    this.at(index - 1).next = oldNode.next;
+
+    oldNode = null;
   }
 }
 
